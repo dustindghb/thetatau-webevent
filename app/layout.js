@@ -1,16 +1,18 @@
 import localFont from "next/font/local";
 import "./globals.css";
+import dynamic from 'next/dynamic';
 
-
-export const metadata = {
- 
-};
+const AuthProvider = dynamic(() => import('./AuthContext').then(mod => mod.AuthProvider), {
+  ssr: false
+});
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        {children}
+        <AuthProvider>
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );

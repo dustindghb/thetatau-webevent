@@ -1,41 +1,48 @@
-import '@fontsource/roboto/300.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
+'use client'
+import React from 'react';
+import { useAuth } from './AuthContext';
+import { useRouter } from 'next/navigation';
+import dynamic from 'next/dynamic';
 
-import Button from '@mui/material/Button';
-import AppBar from '@mui/material/AppBar';
-import DrawerAppBar from './components/DrawerAppBar';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import { getAnalytics, isSupported } from "firebase/analytics";
 
+
+const GoogleAuth = dynamic(() => import('./components/GoogleAuth'), { ssr: false });
+
+function LandingPage({ onAuthentication }) {
+  return (
+    <div className="text-center">
+      <h1 className="text-5xl font-bold mb-10">Welcome to Our App</h1>
+      <p className="text-xl mb-10">Please sign in with your SCU email to continue</p>
+      <GoogleAuth onAuthentication={onAuthentication} />
+    </div>
+  );
+}
 
 export default function Home() {
-  return (
-    <container>
-      <DrawerAppBar></DrawerAppBar>
+  const { user, loading } = useAuth();
+  const router = useRouter();
 
-      <Box sx={{ display: 'flex', p: 3 }}>
-      <Box sx={{ display: 'flex', mt: 25 }}>
-        <Box sx={{ flex: '1', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-    
-        <Typography>
-          img goes here
-        </Typography>
-        </Box>
-        <Box sx={{ flex: '2', p: 2 }}>
-          <Typography variant="h2" sx = {{mb: 2}}>
-            Productivity Resources And A Challenge For You
-        </Typography>
-        <Typography variant="h5">
-          Welcome to the Theta Tau webevent. Included are some productivity resources to help with the beginning of the academic year, to help you find
-          what works for your, and to offer more insights to productivity, procrastination, and burnout. <br></br> <br></br>
-          Included are pieces to a puzzle, as well. First one to solve it wins x. Winner will be contacted after fall.
-        </Typography>
-      </Box>
-      </Box>
-    </Box>
-    </container>
-    
+  const handleAuthentication = (authenticatedUser) => {
+    if (authenticatedUser && authenticatedUser.email.endsWith('@scu.edu')) {
+      router.push('/home');
+    } else {
+      alert('Please use an @scu.edu email address to sign in.');
+    }
+  };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (user) {
+    router.push('/home');
+    return null;
+  }
+
+  return (
+    <main>
+      <LandingPage onAuthentication={handleAuthentication} />
+    </main>
   );
 }

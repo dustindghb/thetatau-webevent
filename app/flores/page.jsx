@@ -1,15 +1,32 @@
+'use client'
 import * as React from 'react';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Accordion from '@mui/material/Accordion';
-import AccordionActions from '@mui/material/AccordionActions';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import dynamic from 'next/dynamic';
+import { useAuth } from '../AuthContext';
 
-export default function page() {
+import { useRouter } from 'next/navigation';
+
+const FirebaseForm = dynamic(() => import('../components/FirebaseForm'), { ssr: false });
+
+export default function Page() {
+  const router = useRouter();
+  const { user, loading } = useAuth();;
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!user) {
+    router.push('/');
+    return null;
+  }
   return (
     <Container maxWidth="sm">
       <Box sx={{ my: 4 }}>
@@ -18,7 +35,7 @@ export default function page() {
         </Typography>
         <Button 
           variant="contained" 
-          href="/" 
+          onClick={() => router.push('/home')}
           sx={{
             position: 'absolute',
             top: '16px',
@@ -138,9 +155,9 @@ export default function page() {
           C zkyjvvgn jar ecd r adufmlv az xwztgguf evswczi niyhs by <br></br>
             wydjxkzy jmsgxy hmhsnpee sbbol lug ap h kpwlybz-jduyg. <br></br>
             Ov uguyw oehy pghijq lvdl xtyy hvi fas ynugt, vgv dycf <br></br>
-            hr mymqx mpk wyalrw as dymeo kfw bhgjl: "Mb igsc, gl's <br></br>
-            zhyi xcwgsp rzel'kl ran eylvr -- Yobw vrxs rqy xpwea yvsxm fq lrr!" <br></br>
-            Oafg'a lq quul km kal moik qqtl lljicx yefbqt ayyf wubui mhp iyznw?  
+            hr mymqx mpk wyalrw as dymeo kfw bhgjl: &quot; Mb igsc, gl&apos;s <br></br>
+            zhyi xcwgsp rzel&apos;kl ran eylvr -- Yobw vrxs rqy xpwea yvsxm fq lrr! &quot; <br></br>
+            Oafg&apos;a lq quul km kal moik qqtl lljicx yefbqt ayyf wubui mhp iyznw?  
         </AccordionDetails>
       </Accordion>
       <Accordion>
@@ -157,7 +174,7 @@ export default function page() {
             Vln hfly pephb es zfsrv so pmy upeuw, bpjjg feeo jji zcvxj, <br></br>
             iwpwubgif fh eym car oseesa wqeii jji vm mqkxjpnps qevmwc iubgi <br></br>
             kx bajm divhsaijx pijqvn eym sciu. Lhlsihmdgh, cdj vwvh nsbax <br></br>
-            uzp wgrba tz wxw uyantobhmpkb, qsnwp xji qqsnsv'w pic pwudw mv
+            uzp wgrba tz wxw uyantobhmpkb, qsnwp xji qqsnsv&apos;w pic pwudw mv
             epwnhgx xji vewlcv.
         </AccordionDetails>
       </Accordion>
@@ -173,16 +190,16 @@ export default function page() {
         <AccordionDetails>
             Weq lbkjev egvr vrrugkrt mno owchf. Mye izqrg afrvm yiam neot, <br></br>
             dyg mye umcv uhish ecw ytqy. Wpg qrg sejip xb izlh bji exrr <br></br>
-            kwtwr'l codl qr gav fuwpx uhish; ejia myeb pch gkrnvngvexu <br></br>
+            kwtwr&apos;l codl qr gav fuwpx uhish; ejia myeb pch gkrnvngvexu <br></br>
             iw inp, gav rhit lbkje iwwrq bk edaa kbbeg, dvf lr lrig bq <br></br>
-            xux wrrvv lbkje: "Wwkp ngu szmcx! Gav mrzg cbn krb, bji zhie <br></br>
-            bww lnov tr awjsxi." Wkmp xuxp rhielrw khh bczrke, tkm qaaxi sdqf; <br></br>
-            "Aur jhrcnh V yfdgmt xjh youagw javn L kcver rlo wp sax? Z hdl <br></br>
+            xux wrrvv lbkje: &quot;Wwkp ngu szmcx! Gav mrzg cbn krb, bji zhie <br></br>
+            bww lnov tr awjsxi.&quot; Wkmp xuxp rhielrw khh bczrke, tkm qaaxi sdqf; <br></br>
+            &quot;Aur jhrcnh V yfdgmt xjh youagw javn L kcver rlo wp sax? Z hdl <br></br>
             digmvr jqxi gav oqm cpy mye iwqh vm naqbu, eaw tuw bji gaiodb <br></br>
-            qj gav owpgv; nm cedav M farlo pczr mye kqfi." Ngu sr pg hvw. <br></br>
+            qj gav owpgv; nm cedav M farlo pczr mye kqfi.&quot; Ngu sr pg hvw. <br></br>
         </AccordionDetails>
       </Accordion>
-      
+     <FirebaseForm /> 
     </Container>
   )
 }
