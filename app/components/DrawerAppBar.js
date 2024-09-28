@@ -8,15 +8,14 @@ import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
 import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import Image from 'next/image'
 
-const drawerWidth = 240;
+const drawerWidth = 300;
 
 function DrawerAppBar(props) {
   const { window } = props;
@@ -34,7 +33,7 @@ function DrawerAppBar(props) {
       <Divider />
       <List>
         <ListItemButton href="/flores"sx={{ textAlign: 'center' }}>
-                  Puzzle
+                  Claves Et Seras
         </ListItemButton>
         <ListItemButton href="/resources"sx={{ textAlign: 'center'}}>
                   Productivity Resources
@@ -46,12 +45,12 @@ function DrawerAppBar(props) {
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: 'flex'}}>
+    <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <AppBar
-        sx={{bgcolor: "#852a1e"}}
+        sx={{ bgcolor: "#852a1e" }}
         component="nav"
-        >
+      >
         <Toolbar>
 
           <IconButton
@@ -63,26 +62,33 @@ function DrawerAppBar(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography
-            variant="h6"
-            component="a"
-            href="https://www.scuthetatau.com/"
-            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block', } }}
-          >
-            Theta Tau
-          </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', justifyContent: 'flex-end' } }}>
-              <Button variant="text" href="/flores"sx={{ my: 2, color: 'white', '&:hover': {
-              backgroundColor: '#631b11'} }}>
-                  Puzzle
-              </Button>
-              <Button variant="text" href="/resources"sx={{ my: 2, color: 'white', '&:hover': {
-              backgroundColor: '#631b11'}}}>
-                  Productivity Resources
-              </Button>
+
+          {/* Add the Theta Tau logo here */}
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <Image src="/ThetaTauLogo.png" alt="Theta Tau Logo" width={500}
+              height={300} style={{ width: '30px', marginRight: '12px' }} />
+            <Typography
+              variant="h6"
+              component="a"
+              href="https://www.scuthetatau.com/"
+               sx={{ fontSize: '1.5rem', display: { xs: 'none', sm: 'block' } }}
+            >
+              Theta Tau
+            </Typography>
           </Box>
+
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', justifyContent: 'flex-end' } }}>
+            <Button variant="text" href="/flores" sx={{ fontSize: '1rem', my: 2, color: 'white', '&:hover': { backgroundColor: '#631b11' } }}>
+              Claves Et Seras
+            </Button>
+            <Button variant="text" href="/resources" sx={{ fontSize: '1rem', my: 2, color: 'white', '&:hover': { backgroundColor: '#631b11' } }}>
+              Productivity Resources
+            </Button>
+          </Box>
+
         </Toolbar>
       </AppBar>
+      
       <nav>
         <Drawer
           container={container}
@@ -90,7 +96,7 @@ function DrawerAppBar(props) {
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
+            keepMounted: true, 
           }}
           sx={{
             display: { xs: 'block', sm: 'none' },
@@ -100,9 +106,8 @@ function DrawerAppBar(props) {
           {drawer}
         </Drawer>
       </nav>
-
-  </Box>
+    </Box>
   );
 }
 
-export default DrawerAppBar
+export default DrawerAppBar;

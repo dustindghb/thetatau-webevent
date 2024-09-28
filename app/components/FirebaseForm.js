@@ -6,6 +6,7 @@ import { getAuth } from 'firebase/auth';
 import { db } from '../firebaseConfig';
 import TextField from '@mui/material/TextField';
 import { useAuth } from '../AuthContext';
+import { FormControl, InputLabel, Input, FormHelperText } from '@mui/material';
 
 async function addDataToFireStore(name, email, message) {
   try {
@@ -51,7 +52,7 @@ export default function FirebaseForm() {
     if (added) {
       setName("");
       setMessage("");
-      alert("Data added to Firestore successfully");
+      alert("Submitted successfully");
     } else {
       alert("Failed to add data. Please try again.");
     }
@@ -60,34 +61,43 @@ export default function FirebaseForm() {
   return (
     <form onSubmit={handleSubmit} className='max-w-md mx-auto p-4 bg-white shadow-md'>
       <div className='mb-4'>
+      
         <label htmlFor='name' className='block text-gray-700 font-bold mb-2'>
           Name:
         </label>
         <TextField
           id="outlined-basic"
-          label="Enter name"
+          label="Enter preferred name"
           variant="outlined"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          
+          sx={{
+              width: '100%', maxWidth: '600px',
+
+          }}
         />
       </div>
       <div className='mb-4'>
         <label htmlFor='message' className='block text-gray-700 font-bold mb-2'>
-          Message:
+          Decryption:
         </label>
         <TextField
-          id="standard-multiline-flexible"
-          label="Enter message"
+          id="filled-multiline-static"
+          label="Enter Decryption"
           multiline
-          maxRows={16}
-          variant="standard"
+          rows={4}
+          variant="filled"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
+          sx={{ width: '100%', maxWidth: '600px' }}
         />
       </div>
       <div className='text-center'>
-        <button type='submit' className='bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg'>
-          Submit
+        <button
+            type="submit"
+            className="bg-[#852a1e] hover:bg-[#631b11] text-white font-bold py-2 px-4 rounded-lg">
+            Submit
         </button>
       </div>
     </form>

@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { app } from '../firebaseConfig';  
 
+import Button from '@mui/material/Button';
+
 const GoogleAuth = ({ onAuthentication }) => {
   const [error, setError] = useState(null);
 
@@ -39,9 +41,20 @@ const GoogleAuth = ({ onAuthentication }) => {
 
   return (
     <div>
-      <button onClick={handleSignIn} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+      <Button onClick={handleSignIn}
+      sx={{
+            position: 'centered',
+            backgroundColor: '#852a1e',
+            color: 'white',
+            '&:hover': {
+              backgroundColor: '#631b11',
+            },
+            '&:focus': {
+              outline: 'none', 
+            }
+          }}>
         Sign in with Google
-      </button>
+      </Button>
       {error && <p className="text-red-500 mt-2">{error}</p>}
     </div>
   );

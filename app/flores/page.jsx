@@ -10,6 +10,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import dynamic from 'next/dynamic';
 import { useAuth } from '../AuthContext';
+import Image from 'next/image'
 
 import { useRouter } from 'next/navigation';
 
@@ -29,9 +30,30 @@ export default function Page() {
   }
   return (
     <Container maxWidth="sm">
-      <Box sx={{ my: 4 }}>
-        <Typography variant="h4" component="h1" sx={{ mb: 2 }}>
-          img of eye goes here
+      <Box sx={{ flex: '1', display: 'flex', alignItems: 'center', justifyContent: 'center', pl: 10, pt: 5, flexDirection: 'row' }}>
+          <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
+              <Image
+                width={500}
+                height={300}
+                src="/eyesigil.jpg"
+                alt="sigil1"
+                style={{ maxWidth: '75%', height: 'auto' }}
+              />
+            </Box>
+
+            <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4, pt: 2 }}>
+              <Image
+                width={500}
+                height={300}
+                src="/eyesigil2.jpg" 
+                alt="sigil2"
+                style={{ maxWidth: '80%', height: 'auto' }} 
+              />
+            </Box>
+        </Box>
+      <Box sx={{ p: 5 }}>
+        <Typography variant="h5" component="h1" sx={{ mb: 2 }}>
+          &quot;keys should be the key .. do not worry, they have near vision .. where is the third?&quot;
         </Typography>
         <Button 
           variant="contained" 
@@ -58,13 +80,35 @@ export default function Page() {
       <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel2-content"
+          id="panel2-header"
+        >
+          
+        </AccordionSummary>
+        <AccordionDetails sx={{ fontFamily: 'monospace' }} >
+          A key for you 978-0590450874
+        </AccordionDetails>
+      </Accordion>
+
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1-content"
           id="panel1-header"
+          sx={{ fontFamily: 'monospace' }}
         >
-          theta
+          II.
         </AccordionSummary>
         <AccordionDetails>
-          image goes here
+          <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4, pt: 2 }}>
+              <Image
+                width={500}
+                height={300}
+                src="/blurry.png" 
+                alt="II"
+                style={{ maxWidth: '100%', height: 'auto' }} 
+              />
+            </Box>
         </AccordionDetails>
       </Accordion>
 
@@ -74,9 +118,9 @@ export default function Page() {
           aria-controls="panel2-content"
           id="panel2-header"
         >
-          tau
+          
         </AccordionSummary>
-        <AccordionDetails>
+        <AccordionDetails sx={{ fontFamily: 'monospace' }} >
           I. blocks <br></br>
           III. bulletin board <br></br>
           IV. cubbies
@@ -89,7 +133,7 @@ export default function Page() {
           aria-controls="panel3-content"
           id="panel3-header"
         >
-          rush
+          
         </AccordionSummary>
         <AccordionDetails sx={{ fontFamily: 'monospace', letterSpacing: '0.5em' }}>
               L A N E C Y A T C U <br />
@@ -108,7 +152,7 @@ export default function Page() {
           aria-controls="panel4-content"
           id="panel4-header"
         >
-          is
+          
         </AccordionSummary>
         <AccordionDetails>
           <ol>
@@ -133,7 +177,7 @@ export default function Page() {
           aria-controls="panel2-content"
           id="panel2-header"
         >
-          winter !!!
+          
         </AccordionSummary>
         <AccordionDetails>
           nine tails in the night <br></br>
@@ -149,7 +193,7 @@ export default function Page() {
           aria-controls="panel2-content"
           id="panel2-header"
         >
-          !corrupted
+          
         </AccordionSummary>
         <AccordionDetails>
           C zkyjvvgn jar ecd r adufmlv az xwztgguf evswczi niyhs by <br></br>
@@ -166,7 +210,7 @@ export default function Page() {
           aria-controls="panel2-content"
           id="panel2-header"
         >
-          !corrupted
+          
         </AccordionSummary>
         <AccordionDetails>
             Cdj fovo kw j ofpcvc dmaz, goh hmhjryzfh xs eecym. <br></br>
@@ -185,7 +229,7 @@ export default function Page() {
           aria-controls="panel2-content"
           id="panel2-header"
         >
-          !corrupted
+          
         </AccordionSummary>
         <AccordionDetails>
             Weq lbkjev egvr vrrugkrt mno owchf. Mye izqrg afrvm yiam neot, <br></br>
@@ -199,7 +243,10 @@ export default function Page() {
             qj gav owpgv; nm cedav M farlo pczr mye kqfi.&quot; Ngu sr pg hvw. <br></br>
         </AccordionDetails>
       </Accordion>
-     <FirebaseForm /> 
+      <Box sx ={{pt: 5, justifyContent: 'center' }}>
+        <FirebaseForm /> 
+      </Box>
+     
     </Container>
   )
 }

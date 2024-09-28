@@ -3,6 +3,8 @@ import React from 'react';
 import { useAuth } from './AuthContext';
 import { useRouter } from 'next/navigation';
 import dynamic from 'next/dynamic';
+import { Box } from '@mui/material';
+import Image from 'next/image'
 
 import { getAnalytics, isSupported } from "firebase/analytics";
 
@@ -11,11 +13,24 @@ const GoogleAuth = dynamic(() => import('./components/GoogleAuth'), { ssr: false
 
 function LandingPage({ onAuthentication }) {
   return (
-    <div className="text-center">
-      <h1 className="text-5xl font-bold mb-10">Welcome to Our App</h1>
-      <p className="text-xl mb-10">Please sign in with your SCU email to continue</p>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        textAlign: 'center',
+        padding: 4,
+        justifyContent: 'flex-start',  // Shifts content to the top
+        height: '100vh',
+        paddingTop: '10vh',  // Adjust padding to control how far down from the top
+      }}
+    >
+      <Image src="/ThetaTauLogo.png" alt="Theta Tau Logo" width={500}
+              height={300} style={{ width: '150px', marginBottom: '24px' }} />
+      <h1 style={{ fontSize: '2.5rem', marginBottom: '24px' }}>Welcome to the Fall Theta Tau Webevent</h1>
+      <p style={{ fontSize: '1.25rem', marginBottom: '24px' }}>Please sign in with your SCU email to continue</p>
       <GoogleAuth onAuthentication={onAuthentication} />
-    </div>
+    </Box>
   );
 }
 
